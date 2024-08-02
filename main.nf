@@ -1,20 +1,8 @@
 #!/usr/bin/env nextflow
+nextflow.enable.moduleBinaries = true
 
-nextflow.enable.dsl=2
-
-process hello {
-    script:
-    """
-    echo "Hello"
-    """
-}
-
-process world {
-    script:
-    """
-    mini_process.py
-    """ 
-}
+include { hello } from './modules/hello'
+include { world } from './modules/world'
 
 workflow {
     hello()

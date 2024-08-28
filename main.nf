@@ -10,13 +10,15 @@ process hello {
 }
 
 process world {
+    input:
+    path(world_script)
     script:
     """
-    mini_process.py
+    python $world_script
     """ 
 }
 
 workflow {
     hello()
-    world()
+    world(file("${baseDir}/scripts/mini_process.py"))
 }
